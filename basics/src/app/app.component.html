@@ -1,0 +1,18 @@
+<!--<b>Property Binding</b><br>-->
+<!--<img [src]="imgUrl" alt="" height="200">-->
+<!--<hr>-->
+<!--<img src="{{ imgUrl }}" alt="" height="200">-->
+<!--<hr>-->
+
+<b>Event Binding</b><br>
+<input (keyup)="changeImage($event)" [value]="imgUrl">
+
+<!--<app-post [postImage]="imgUrl"></app-post>-->
+<app-post [img]="imgUrl" (imgSelected)="logImage($event)">
+  <p>Some content from Component title</p>
+</app-post>
+
+<p>Some text will be here!!</p>
+<p>Hello {{ name.toUpperCase() }}</p>
+<p>Hello {{ getName() }}</p>
+<p>{{ 15 + 13 }}</p>
