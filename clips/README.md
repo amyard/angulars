@@ -31,3 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 -- npx tailwind init  - create tailwind config file   
 install tailwind css PLUGIN    
 
+
+-- ng generate component user/auth-modal    
+
