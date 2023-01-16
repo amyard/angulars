@@ -1,3 +1,11 @@
+  <p *ngIf = "blueClass">Button is blue.</p>
+
+<button (click)="blueClass = !blueClass"
+  [ngClass]="{ blue: blueClass }"
+  [ngStyle]="{ 'font-size.px':fontSize }">Change</button>
+
+<hr>
+
 <!--<b>Property Binding</b><br>-->
 <!--<img [src]="imgUrl" alt="" height="200">-->
 <!--<hr>-->
@@ -8,11 +16,27 @@
 <input (keyup)="changeImage($event)" [value]="imgUrl">
 
 <!--<app-post [postImage]="imgUrl"></app-post>-->
-<app-post [img]="imgUrl" (imgSelected)="logImage($event)">
-  <p>Some content from Component title</p>
+<app-post *ngFor="let image of images; let i = index"
+          [img]="image"
+          (imgSelected)="logImage($event)">
+  <p>{{ i }} Some content from Component title</p>
 </app-post>
 
 <p>Some text will be here!!</p>
-<p>Hello {{ name.toUpperCase() }}</p>
+<p>Hello {{ name | titlecase }}</p>
 <p>Hello {{ getName() }}</p>
 <p>{{ 15 + 13 }}</p>
+
+<p>{{ currentDate | date: 'MMMM d, YYYY' }}</p>
+<p>{{ currentDate | date: 'longDate' }}</p>
+
+<p>{{ cost | currency }}</p>
+<p>{{ cost | currency: 'JPY' }}</p>
+
+<p>{{ temperature | number: '1.0-0' }}</p>
+
+<pre>{{ pizza | json }}</pre>
+
+
+
+
