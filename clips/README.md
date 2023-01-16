@@ -33,4 +33,6 @@ install tailwind css PLUGIN
 
 
 -- ng generate component user/auth-modal    
+-- ng generate module shared  -- create a folder with ts file    
+
 
