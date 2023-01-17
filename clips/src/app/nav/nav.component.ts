@@ -14,6 +14,6 @@ export class NavComponent {
     // to reduce redirect after click on <a>
     $event.preventDefault();
 
-    this.modal.toggleModal();
+    this.modal.toggleModal('auth');
   }
 }
