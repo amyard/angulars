@@ -32,7 +32,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 install tailwind css PLUGIN    
 
 
--- ng generate component user/auth-modal    
+-- ng generate component user/auth-modal   
+-- ng g c user/auth-modal   -- the same     
+
 -- ng generate module shared  -- create a folder with ts file    
 
 
