@@ -1,3 +1,4 @@
+
 # Clips
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
@@ -37,4 +38,5 @@ install tailwind css PLUGIN
 
 -- ng generate module shared  -- create a folder with ts file    
 
-
+https://regexr.com/  --> Community Patterns --> search input 'Password'    
+npm i ngx-mask@14.2.4   - add phone mask
