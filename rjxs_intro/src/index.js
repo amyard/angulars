@@ -347,3 +347,14 @@ const subscription = observable.subscribe({
         console.log('complete')
     }
 })
+
+
+/* 
+
+
+switchMap  - stop working on the order and start working on the new order. only the last order will be finished
+concatMap  - the order is added to the queue. you finish whatever order you're working on. once you finish the order you will work on the new order.
+mergeMap   - you will work on all orders at the same time as soon as you're given them
+exhaustMap - you ignore new orders and finish whatever order you're working on. once finished you are free to accept the new order. 
+
+*/
