@@ -39,4 +39,5 @@ install tailwind css PLUGIN
 -- ng generate module shared  -- create a folder with ts file    
 
 https://regexr.com/  --> Community Patterns --> search input 'Password'    
-npm i ngx-mask@14.2.4   - add phone mask
+npm i ngx-mask@14.2.4   - add phone mask    
+ng add @angular/fire - install firebase to project    
