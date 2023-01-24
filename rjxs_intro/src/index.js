@@ -124,8 +124,8 @@ setTimeout(() => {
 // })
 
 
-import { fromEvent, of, interval } from 'rxjs';
-import { map, filter, reduce, take, scan, tap } from 'rxjs/operators';
+// import { fromEvent, of, interval } from 'rxjs';
+// import { map, filter, reduce, take, scan, tap } from 'rxjs/operators';
 
 // const observable = fromEvent(
 //     document, 'keydown'
@@ -173,20 +173,169 @@ import { map, filter, reduce, take, scan, tap } from 'rxjs/operators';
 // )
 
 
-// return 0,1,2,3,4,10
-const observable = interval(500).pipe(
-    take(5),
-    // both show the same result
-    //tap(console.log),
-    tap({
-        next(val) {
-            console.log(val)
-        }
-    }),
-    reduce(
-        (acc, val) => acc + val,
-        0
-    )
+// // return 0,1,2,3,4,10
+// const observable = interval(500).pipe(
+//     take(5),
+//     // both show the same result
+//     //tap(console.log),
+//     tap({
+//         next(val) {
+//             console.log(val)
+//         }
+//     }),
+//     reduce(
+//         (acc, val) => acc + val,
+//         0
+//     )
+// )
+
+
+// const subscription = observable.subscribe({
+//     next(value) {
+//         console.log(value)
+//     },
+//     complete() {
+//         console.log('complete')
+//     }
+// })
+
+
+
+
+/* FLATTENING OPERATOR */
+
+import { fromEvent, interval } from 'rxjs';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
+
+// const button = document.querySelector('#btn')
+// const observable = fromEvent(
+//     button, 'click'
+// ).pipe(
+//     map(() => {
+//         return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1')
+//     })
+// )
+
+
+// const subscription = observable.subscribe({
+//     next(value) {
+//         value.subscribe(console.log)
+//     },
+//     complete() {
+//         console.log('complete')
+//     }
+// })
+
+
+
+// const button = document.querySelector('#btn')
+// const observable = fromEvent(
+//     button, 'click'
+// ).pipe(
+//     mergeMap(() => {
+//         // return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1')
+//         return interval(1000).pipe(
+//             tap(console.log),
+//             take(5) // each click will call the iterations and iterations will be duplicated
+//         )
+//     }),
+//     // take(5) // will only runs once . second and next click will not work
+// )
+
+
+// const subscription = observable.subscribe({
+//     next(value) {
+//         console.log(value)
+//     },
+//     complete() {
+//         console.log('complete')
+//     }
+// })
+
+
+
+// import { switchMap } from 'rxjs/operators';
+
+// const button = document.querySelector('#btn')
+// const observable = fromEvent(
+//     button, 'click'
+// ).pipe(
+//     switchMap(() => {  // will break the first iteration and start new even if first iteration doesn't completed
+//         // it's good to use for ajax requests
+//         return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1').pipe(
+//         // return interval(1000).pipe(
+//             take(5),
+//             tap({
+//                 complete(){
+//                     console.log('inner observation completed')
+//                 }
+//             })
+//         )
+//     })
+// )
+
+
+// const subscription = observable.subscribe({
+//     next(value) {
+//         console.log(value)
+//     },
+//     complete() {
+//         console.log('complete')
+//     }
+// })
+
+
+
+
+// import { concatMap } from 'rxjs/operators';
+
+// const button = document.querySelector('#btn')
+// const observable = fromEvent(
+//     button, 'click'
+// ).pipe(
+//     // the requests will be queued . next request will be only after finishid the last. Queue in C#
+//     concatMap(() => { 
+//         return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1').pipe(
+//             take(5),
+//             tap({
+//                 complete(){
+//                     console.log('inner observation completed')
+//                 }
+//             })
+//         )
+//     })
+// )
+
+
+// const subscription = observable.subscribe({
+//     next(value) {
+//         console.log(value)
+//     },
+//     complete() {
+//         console.log('complete')
+//     }
+// })
+
+
+import { exhaustMap } from 'rxjs/operators';
+
+const button = document.querySelector('#btn')
+const observable = fromEvent(
+    button, 'click'
+).pipe(
+    // the next request will be never called
+    // to reduct multiply clicking on submit button
+    exhaustMap(() => { 
+        return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1').pipe(
+            take(5),
+            tap({
+                complete(){
+                    console.log('inner observation completed')
+                }
+            })
+        )
+    })
 )
 
 
