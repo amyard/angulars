@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormGroup, FormControl, Validators,} from "@angular/forms";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-register',
@@ -7,6 +8,12 @@ import {FormGroup, FormControl, Validators,} from "@angular/forms";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+  constructor(private auth: AngularFireAuth) {}
+
+  // for disabling the button after first click
+  inSubmission = false
+
   // fix error with AbstractControl
   name = new FormControl('', [
     Validators.required,
@@ -47,9 +54,32 @@ export class RegisterComponent {
   alertMsg = 'Please wait! Your account is being created.'
   alertColor = 'blue'
 
-  register() {
+  async register() {
     this.showAlert = true
     this.alertMsg = 'Please wait! Your account is being created.'
     this.alertColor = 'blue'
+    this.inSubmission = true
+
+    const {email, password} = this.registerForm.value
+
+    try {
+      const userCredentials = await this.auth.createUserWithEmailAndPassword(
+        email as string, password as string
+      )
+
+      console.log(userCredentials)
+    } catch (e) {
+      console.log(e)
+
+      this.alertMsg = 'An unexpected error occurred. Please, try again later.'
+      this.alertColor = 'red'
+
+      this.inSubmission = false
+
+      return
+    }
+
+    this.alertMsg = 'Success! Your account has been created.'
+    this.alertColor = 'green'
   }
 }
